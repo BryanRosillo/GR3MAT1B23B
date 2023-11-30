@@ -1,0 +1,5 @@
+libreria\Historial.class
+libreria\Libro.class
+libreria\DevolverServlet.class
+libreria\GestorLibros.class
+libreria\PrestarServlet.class
