@@ -1,7 +1,30 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+<web-app >
+    <display-name>Archetype Created Web Application</display-name>
+
+    <servlet>
+        <servlet-name>PrestarServlet</servlet-name>
+        <servlet-class>libreria.PrestarServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PrestarServlet</servlet-name>
+        <url-pattern>/PrestarServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DevolverServlet</servlet-name>
+        <servlet-class>libreria.DevolverServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DevolverServlet</servlet-name>
+        <url-pattern>/DevolverServlet</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>

@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class GestorLibros {
+
     private ArrayList<Libro> libros;
     private Historial historial;
 
@@ -44,7 +45,7 @@ public class GestorLibros {
         if(this.existeLibro(id)&&this.verificarDisponibilidad(id)){
             libroPrestado = this.buscarLibro(id);
             libroPrestado.setEstado("prestado");
-            this.historial.registrarTransaccion(imprimirReciboPrestamo(libroPrestado,usuario));
+            this.historial.registrarTransaccion(retornarReciboPrestamo(libroPrestado,usuario));
             return true;
         }
         return false;
@@ -60,7 +61,7 @@ public class GestorLibros {
         return libros;
     }
 
-    public String imprimirReciboPrestamo(Libro libroPrestado, String usuario){
+    public String retornarReciboPrestamo(Libro libroPrestado, String usuario){
         Date fechaPrestamo = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaPrestamo);
@@ -92,18 +93,28 @@ public class GestorLibros {
         if(this.existeLibro(id)&&!this.verificarDisponibilidad(id)){
             libroDevuelto = this.buscarLibro(id);
             libroDevuelto.setEstado("disponible");
-            historial.registrarTransaccion(imprimirReciboDevuelto(libroDevuelto,usuario));
+            historial.registrarTransaccion(retornarReciboDevuelto(libroDevuelto,usuario));
             return true;
         }
         return false;
     }
 
-    public String imprimirReciboDevuelto(Libro libroDevuelto, String usuario){
+    public String retornarReciboDevuelto(Libro libroDevuelto, String usuario){
         Date fechaDevolucion = new Date();
         return "<br><br>*******Devolución******<br>" +
                 "ID Libro: " + libroDevuelto.getId() + "<br>" +
                 "Título del libro: " + libroDevuelto.getTitulo() + "<br>" +
                 "Usuario: " + usuario + "<br>" +
                 "Fecha de devolución: " + fechaDevolucion + "<br>";
+    }
+
+    public String imprimirLibrosNoDisponibles(){
+        String libros = "";
+        for(Libro libro : this.libros){
+            if(libro.getEstado().equalsIgnoreCase("prestado")){
+                libros += "- ID del libro: "+ libro.getId() +"<br>- Nombre del libro: "+ libro.getTitulo() + "<br><br>";
+            }
+        }
+        return libros;
     }
 }
